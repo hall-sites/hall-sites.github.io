@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Hi coach how you doing. Congrats on the baby by the way I just heard!!!!!!!!</title>
+    </head>
+    <body>
+        List 1:<textarea id="ta1" rows=20 cols=30></textarea>
+        <br>
+        List 2:<textarea id="ta2" rows=20 cols=30></textarea>
+        <br>
+        <button onclick="cmp()">Compare!!!</button>
+        <div id="missing" style="color:red;"></div>
+        <script>
+            function cmp() {
+                missing.innerHTML = "";
+                let names1 = ta1.value.split('\n');
+                let names2 = ta2.value.split('\n');
+                for (let name of names1) {
+                    if (!names2.includes(name)) {
+                        let d = document.createElement('div');
+                        d.innerHTML = name + "<br>";
+                        missing.appendChild(d);
+                    }
+                }
+                if (missing.innerHTML == "") {
+                    missing.innerHTML = "<span style='color:green'>None missing :)</span>"
+                }
+            }
+        </script>
+    </body>
+</html>
