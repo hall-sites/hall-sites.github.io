@@ -5,6 +5,7 @@
     <title>Factoring Practice</title>
     <meta name="description" content="Practice factoring online for free with no ads!">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta charset="UTF-8">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <style>
@@ -80,6 +81,16 @@
             padding: 20px;
             border: 1px solid #888;
             width: 80%;
+            font-size: 1.5rem !important;
+
+        }
+
+        input[type=radio] {
+            -ms-transform: scale(1.5);
+            /* IE 9 */
+            -webkit-transform: scale(1.5);
+            /* Chrome, Safari, Opera */
+            transform: scale(1.5);
         }
 
         .close {
@@ -102,6 +113,7 @@
         let f2 = Math.floor(Math.random() * 11) - 5;
         let coeff = 1;
         let score = 0;
+        let streak = 0;
         var modal;
         var btn;
         var span;
@@ -124,8 +136,13 @@
 
         function generateEq() {
             let res = "";
-            f1 = Math.floor(Math.random() * 11) - 5;
-            f2 = Math.floor(Math.random() * 11) - 5;
+            if (setting0.checked) {
+                f1 = Math.floor(Math.random() * 11) - 5;
+                f2 = Math.floor(Math.random() * 11) - 5;
+            } else {
+                f1 = Math.floor(Math.random() * 6) + 1;
+                f2 = Math.floor(Math.random() * 6) + 1;
+            }
             if (setting1.checked) {
                 coeff = 1;
             } else {
@@ -155,6 +172,11 @@
         function doCheck() {
             if (checkFactors()) {
                 score++;
+                streak++;
+                if (streak >= 3) {
+                    document.getElementById("streak").hidden = false;
+                    streakNum.innerHTML = streak;
+                }
                 points.innerHTML = score;
                 eq.innerHTML = generateEq();
                 if (coeff != 1) {
@@ -166,7 +188,9 @@
                 n2.value = "";
                 n1.focus();
             } else {
-                Swal.fire("That didn't work. Please try again.");
+                streak = 0;        
+                document.getElementById("streak").hidden = true;
+                Swal.fire("That didn't work. Please try again!");
             }
         }
 
@@ -233,7 +257,8 @@
 
 <body>
     <h1>Online Factoring Practice</h1>
-    <h2>Score: <span id="points">0</span> &sdot; Time: <span id="time">0</span></h2>
+    <h2>Score: <span id="points">0</span> &sdot; Time: <span id="time">0</span> <span id="streak" hidden>&sdot;
+        🔥<span id="streakNum"></span></span> </h2>
     <div id="equation">
         <i id="eq">x<sup>2</sup> - x + 6</i>
         <div id="input">
@@ -249,6 +274,13 @@
     <div id="myModal" class="modal">
         <div class="modal-content">
             <span class="close">&times;</span>
+            <div>
+                <input type="radio" id="setting0" name="pos-neg" value="lewy">
+                <label for="setting2">Include negatives?</label>
+            </div>
+
+            <br>
+
             <div>
                 <input type="radio" id="setting1" name="a-val" value="huey" checked>
                 <label for="setting1">a = 1</label>
