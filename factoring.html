@@ -146,7 +146,7 @@
             if (setting1.checked) {
                 coeff = 1;
             } else {
-                coeff = Math.floor(Math.random() * 2) + 1;;
+                coeff = Math.floor(Math.random() * 10) + 1;
             }
             if (Math.abs(f1 + f2 * coeff) != 1 && f1 + f2 * coeff != 0) {
                 res = "x<sup>2</sup> " + fmtNum(f1 + f2 * coeff) + "x " + fmtNum(f1 * f2);
@@ -275,7 +275,7 @@
         <div class="modal-content">
             <span class="close">&times;</span>
             <div>
-                <input type="radio" id="setting0" name="pos-neg" value="lewy">
+                <input type="checkbox" id="setting0" name="pos-neg" value="lewy">
                 <label for="setting2">Include negatives?</label>
             </div>
 
@@ -288,7 +288,7 @@
 
             <div>
                 <input type="radio" id="setting2" name="a-val" value="dewey">
-                <label for="setting2">a >= 1</label>
+                <label for="setting2">1 <= a <= 10</label>
             </div>
         </div>
     </div>
