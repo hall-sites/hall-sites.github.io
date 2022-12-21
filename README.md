@@ -1,3 +1,3 @@
-# hallmath.github.io
+# hall-sites.github.io
 
-great website lol
+Collection of a few sites!
