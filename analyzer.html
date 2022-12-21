@@ -100,6 +100,10 @@
         let wordLens = [1];
         let numSentences = 0;
         let totalWords = 0;
+        if (text.length > 0 && text[text.length - 1] != ' ') {
+            totalWords += 1;
+        }
+
         for (let i = 0; i < text.length; i++) {
             if ('.!?'.includes(text[i])) {
                 wordLens.push(0);
@@ -118,8 +122,11 @@
             }
             sentenceBox.innerHTML += '<br>';
         }
-        if (numSentences > 0)
+        if (numSentences > 0) {
             aveSLen.innerHTML = Math.floor((totalWords / numSentences) * 100) / 100;
+        } else {
+            aveSLen.innerHTML = 0;
+        }
         tSentences.innerHTML = numSentences;
         tWords.innerHTML = totalWords;
     }
