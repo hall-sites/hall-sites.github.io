@@ -32,12 +32,11 @@
 
         .box {
             background-color: white;
-            margin: 2% auto;
-            padding: 2.5% 1%;
+            margin: 2%;
+            padding: 1%;
             box-shadow: rgb(204, 204, 204) 0 0 10px 10px;
             font-size: 1.3rem;
-            width: 36%;
-            padding: 2%;
+            width: 40%;
         }
 
         #spacer {
@@ -46,14 +45,16 @@
 
         #left-box {
             float: left;
-            margin-left: 6%;
+            margin-left: 2%;
             margin-right: 1%;
+            width: 30%;
         }
 
         #right-box {
             float: right;
-            margin-right: 6%;
+            margin-right: 2%;
             margin-left: 1%;
+            width: 60%;
         }
 
         #essay {
@@ -97,28 +98,40 @@
     let sentenceBox = document.getElementById('sentence-lengths');
     function doStuff() {
         let text = essay.value;
-        let wordLens = [1];
+        let sentences = [[]];
         let numSentences = 0;
         let totalWords = 0;
         if (text.length > 0 && text[text.length - 1] != ' ') {
             totalWords += 1;
         }
 
+        let buf = "";
         for (let i = 0; i < text.length; i++) {
-            if ('.!?'.includes(text[i])) {
-                wordLens.push(0);
+            if ('.!?'.includes(text[i]) && buf != 'Mr' && buf != 'Ms' && buf != 'Mrs' && buf != 'Dr') {
+                sentences[sentences.length - 1].push(buf);
+                buf = "";
+                sentences.push([]);
                 numSentences += 1;
-            } else if (text[i] == ' ') {
+            } else if (text[i] == ' ' && buf != '') {
+                sentences[sentences.length - 1].push(buf);
+                buf = "";
                 totalWords += 1;
-                wordLens[wordLens.length - 1] += 1;
+            } else if (text[i] != ' ') {
+                buf += text[i];
             }
         }
 
+        sentences.pop(); // unused sentence arr at end
+
         sentenceBox.innerHTML = '';
 
-        for (let i = 0; i < wordLens.length; i++) {
-            for (let j = 0; j < wordLens[i]; j++) {
-                sentenceBox.innerHTML += '#';
+        for (let i = 0; i < sentences.length; i++) {
+            for (let j = 0; j < sentences[i].length; j++) {
+                if (j == sentences[i].length - 1) {
+                    sentenceBox.innerHTML += sentences[i][0];
+                } else {
+                    sentenceBox.innerHTML += '#';
+                }
             }
             sentenceBox.innerHTML += '<br>';
         }
@@ -129,6 +142,7 @@
         }
         tSentences.innerHTML = numSentences;
         tWords.innerHTML = totalWords;
+        console.log(sentences);
     }
 </script>
 
