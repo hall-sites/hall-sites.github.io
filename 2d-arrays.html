@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>2d array demo</title>
+        <style>
+            html, body {
+                margin: 0;
+                font-family: sans-serif;
+            }
+
+            h1 {
+                text-align: center;
+            }
+
+            .rotDiv {
+                transform: rotate(80deg);
+                -ms-transform: rotate(80deg);
+                -webkit-transform: rotate(80deg);
+                display: inline-block;
+                width: 60px;
+            }
+            
+            #con {
+                width: 80%;
+                margin: 0 auto;
+                font-size: 2rem;
+                text-align: center;
+            }
+
+            #the-2d-arr {
+                padding-top: 30px;
+                padding-bottom: 100px;
+                font-size: 40px;
+            }
+
+            .code {
+                font-family: monospace;
+                font-size: 2rem;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>2D Array Demo</h1>
+
+        <div id="con">
+            Input 2D Array (use curly brace notation): 
+            <br>
+            <span class="code">int[][] arr = </span><input type="text" class="code" id="arr-input" style="width: 50%;" placeholder="{{...}, {...}, ..., {...}}" oninput="window.onload()" value="{{1,2,3}, {4,5,6}, {7,8,9}}">
+            <br><br>
+            Highlight: 
+            <br>
+            <span class="code">arr</span><input type="text" class="code" id="arr-hi-input" style="width: 10%;" placeholder="[x][y]" oninput="window.onload()">
+            <div id="the-2d-arr">
+                
+            </div>
+        </div>
+
+        <script>
+            let arrDiv = document.getElementById('the-2d-arr');
+            let xy = document.getElementById('arr-hi-input');
+            function strToArr(str) {
+                str = str.replaceAll('{', '[');
+                str = str.replaceAll('}', ']');
+                return JSON.parse(str);
+            }
+
+            function getX() {
+                let buf = "";
+                for (let i = 1; i < 5; i++) {
+                    if (xy.value[i] == ']')
+                        break;
+                    buf += xy.value[i];
+                }
+                return parseInt(buf);
+            }
+
+            function getX() {
+                if (xy.value.length <= 1) return "none";
+                let buf = "";
+                for (let i = 1; i < 5; i++) {
+                    if (xy.value[i] == ']')
+                        break;
+                    buf += xy.value[i];
+                }
+                return parseInt(buf);
+            }
+
+            function getY() {
+                if (xy.value.length <= 1 || !xy.value.includes('][')) return "none";
+                let buf = "";
+                for (let i = xy.value.indexOf('][') + 2; i < 9; i++) {
+                    if (xy.value[i] == ']')
+                        break;
+                    buf += xy.value[i];
+                }
+                return parseInt(buf);
+            }
+
+            function gen2dArr(arr) {
+                arrDiv.innerHTML = '[';
+                for (let i = 0; i < arr.length; i++) {
+                    console.log(getX());
+                    if (getX() == i) {
+                        let addStr = '<span class="rotDiv" style="color: blue;">[';
+                        for (let j = 0; j < arr[i].length; j++) {
+                            if (j != arr[i].length - 1) {
+                                if (getY() == j)
+                                    addStr += '<span style="color:red;">' + arr[i][j] + '</span>,';
+                                else
+                                    addStr += arr[i][j] + ',';
+                            } else {
+                                if (getY() == j)
+                                    addStr += '<span style="color:red;">' + arr[i][j] + '</span>]</span>';
+                                else
+                                    addStr += arr[i][j] + ']</span>';
+                            }
+                        }
+                        arrDiv.innerHTML += addStr;
+                    } else {
+                        arrDiv.innerHTML += '<span class="rotDiv">[' + arr[i] + ']</span>'
+                    }
+                    if (i != arr.length - 1) {
+                        arrDiv.innerHTML += ', ';
+                    }
+                }
+                arrDiv.innerHTML += ']';
+                arrDiv.style.paddingBottom = (100 + arr[0].length * 29) + "px";
+            }
+
+            window.onload = () => {
+                gen2dArr(strToArr(document.getElementById("arr-input").value));
+            }
+
+            
+        </script>
+    </body>
+</html>
