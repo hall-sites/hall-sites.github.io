@@ -150,7 +150,6 @@
             if (checkSolution()) {
                 Swal.fire("Correct! Great job! Here's another one to try...");
                 score++;
-                points++;
                 streak++;
                 if (streak >= 3) {
                     document.getElementById("streak").hidden = false;
@@ -159,7 +158,7 @@
                 n1.value = "";
                 n1.focus();
                 eq.innerHTML = generateEq(); 
-                document.getElementById("points").innerHTML = points;
+                document.getElementById("points").innerHTML = score;
             } else {
                 streak = 0;        
                 document.getElementById("streak").hidden = true;
