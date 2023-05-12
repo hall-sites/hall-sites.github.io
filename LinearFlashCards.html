@@ -109,14 +109,10 @@
     </style>
 
     <script>
-        let f1 = Math.floor(Math.random() * 11) - 5;
-        let f2 = Math.floor(Math.random() * 11) - 5;
-        let coeff = 1;
+
         let score = 0;
         let streak = 0;
-        let aa = 3;
-        let bb = 2;
-        let cc = 14;
+
         let answer = Math.floor(Math.random() * 8)+2;
         let multiplier = Math.floor(Math.random() * 8)+2;
         let adder = Math.floor(Math.random() * 8)+2;
@@ -130,7 +126,7 @@
             return check;
         };
 
-        function fmtNum(n) {
+        function fmtNum(n) { //what does this do ? 
             if (n == 0) {
                 return "";
             } if (n < 0) {
@@ -141,59 +137,38 @@
         }
 
         function generateEq() {
-            let res = "";
             if (setting0.checked) {
-                f1 = Math.floor(Math.random() * 11) - 5;
-                f2 = Math.floor(Math.random() * 11) - 5;
                 answer = Math.floor(Math.random() * 8)+2;
                 multiplier = Math.floor(Math.random() * 8)+2;
                 adder = Math.floor(Math.random() * 8)+2;
             } else {
-                f1 = Math.floor(Math.random() * 6) + 1;
-                f2 = Math.floor(Math.random() * 6) + 1;
+                answer = Math.floor(Math.random() * 8)+2;
+                multiplier = Math.floor(Math.random() * 8)+2;
+                adder = Math.floor(Math.random() * 8)+2;
             }
             if (setting1.checked) {
-                coeff = 1;
+                //nothing for now
             } else {
-                coeff = Math.floor(Math.random() * 10) + 1;
+                //not sure I need another setting
             }
-            if (Math.abs(f1 + f2 * coeff) != 1 && f1 + f2 * coeff != 0) {
-                res = "x<sup>2</sup> " + fmtNum(f1 + f2 * coeff) + "x " + fmtNum(f1 * f2);
-            } else if (Math.abs(f1 + f2 * coeff) == 1) {
-                if (f1 + f2 * coeff > 0) {
-                    res = "x<sup>2</sup> + x " + fmtNum(f1 * f2);
-                } else {
-                    res = "x<sup>2</sup> - x " + fmtNum(f1 * f2);
-                }
-            } else {
-                res = "x<sup>2</sup> " + fmtNum(f1 * f2);
-            }
-            if (coeff > 1) {
-                res = coeff + res;
-            }
-            res = multiplier+"x + "+adder+" = "+(answer*multiplier+adder);
-            return res;
+
+            
+            return multiplier+"x + "+adder+" = "+(answer*multiplier+adder);;
         }
 
-        function checkFactors() {
+        function checkSolution() {
             return n1.value == answer;
         }
 
         function doCheck() {
-            if (checkFactors()) {
+            if (checkSolution()) {
                 score++;
                 streak++;
                 if (streak >= 3) {
                     document.getElementById("streak").hidden = false;
                     streakNum.innerHTML = streak;
                 }
-                points.innerHTML = score;
-                eq.innerHTML = generateEq();
-                if (coeff != 1) {
-                    document.getElementById("coeff").innerHTML = coeff;
-                } else {
-                    document.getElementById("coeff").innerHTML = "";
-                }
+
                 n1.value = "";
                 n2.value = "";
                 n1.focus();
@@ -231,11 +206,7 @@
             }
 
             eq.innerHTML = generateEq();
-            if (coeff != 1) {
-                document.getElementById("coeff").innerHTML = coeff;
-            } else {
-                document.getElementById("coeff").innerHTML = "";
-            }
+            
 
             if (isMobile()) {
 
@@ -270,10 +241,10 @@
     <h2>Score: <span id="points">0</span> &sdot; Time: <span id="time">0</span> <span id="streak" hidden>&sdot;
         🔥<span id="streakNum"></span></span> </h2>
     <div id="equation">
-        <i id="eq">4x+5=17</i>
+        <i id="eq">placeholder</i>
         <div id="input">
-            <i>(<span id="coeff"></span>x = <input type="text" id="n1" class="n"> )(x + <input type="text" id="n2"
-                    class="n"> )</i>
+            <i>x = <input type="text" id="n1" class="n"> 
+            </i>
             <br>
             <button id="check" onclick="doCheck()">
                 CHECK
