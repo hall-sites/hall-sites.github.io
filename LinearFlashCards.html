@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    <title>Factoring Practice</title>
+    <title>Solving Linear Equations Practice</title>
     <meta name="description" content="Practice Solving Linear Equations online for free with no ads!">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <meta charset="UTF-8">
@@ -116,7 +116,10 @@
         let streak = 0;
         let aa = 3;
         let bb = 2;
-        let cc = 14
+        let cc = 14;
+        let answer = Math.floor(Math.random() * 8)+2;
+        let multiplier = Math.floor(Math.random() * 8)+2;
+        let adder = Math.floor(Math.random() * 8)+2;
         var modal;
         var btn;
         var span;
@@ -142,6 +145,9 @@
             if (setting0.checked) {
                 f1 = Math.floor(Math.random() * 11) - 5;
                 f2 = Math.floor(Math.random() * 11) - 5;
+                answer = Math.floor(Math.random() * 8)+2;
+                multiplier = Math.floor(Math.random() * 8)+2;
+                adder = Math.floor(Math.random() * 8)+2;
             } else {
                 f1 = Math.floor(Math.random() * 6) + 1;
                 f2 = Math.floor(Math.random() * 6) + 1;
@@ -165,12 +171,12 @@
             if (coeff > 1) {
                 res = coeff + res;
             }
-            res = aa+"x + "+bb+" = "+cc;
+            res = multiplier+"x + "+adder+" = "+(answer*multiplier+adder);
             return res;
         }
 
         function checkFactors() {
-            return ((parseInt(n1.value) == f1 && parseInt(n2.value) == f2) || (parseInt(n2.value) == f1 && parseInt(n1.value) == f2));
+            return n1.value == answer;
         }
 
         function doCheck() {
@@ -266,7 +272,7 @@
     <div id="equation">
         <i id="eq">4x+5=17</i>
         <div id="input">
-            <i>(<span id="coeff"></span>x + <input type="text" id="n1" class="n"> )(x + <input type="text" id="n2"
+            <i>(<span id="coeff"></span>x = <input type="text" id="n1" class="n"> )(x + <input type="text" id="n2"
                     class="n"> )</i>
             <br>
             <button id="check" onclick="doCheck()">
