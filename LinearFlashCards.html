@@ -162,19 +162,16 @@
 
         function doCheck() {
             if (checkSolution()) {
+                Swal.fire("Correct! Great job! Here's another one to try...");
                 score++;
                 streak++;
                 if (streak >= 3) {
                     document.getElementById("streak").hidden = false;
                     streakNum.innerHTML = streak;
                 }
-
                 n1.value = "";
-                n2.value = "";
-                
                 n1.focus();
-                
-                eq.innerHTML = generateEq();
+                eq.innerHTML = generateEq(); //I added this hoping it would generate a new equation ... but it isn't :(
             } else {
                 streak = 0;        
                 document.getElementById("streak").hidden = true;
