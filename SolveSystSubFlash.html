@@ -161,7 +161,11 @@
         }
 
         function generateEq2() {
+          if (Math.random() < .5)
             return "x = "+flex_coeff+"y + "+(x_answer - y_answer*flex_coeff);
+          else
+          
+            return "y = "+flex_coeff+"x + "+(y_answer - x_answer*flex_coeff);
         }
         function checkSolution() {
             return (n1.value == x_answer && n2.value == y_answer);
