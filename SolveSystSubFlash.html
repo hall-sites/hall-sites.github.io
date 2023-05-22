@@ -159,14 +159,32 @@
         }
 
         function generateEq2() {
-          if (Math.random() < .5)
-            return "x = "+flex_coeff+"y + "+(x_answer - y_answer*flex_coeff);
-          else
-          
-            return "y = "+flex_coeff+"x + "+(y_answer - x_answer*flex_coeff);
+          if (setting1.checked){
+            if (Math.random() < .5)
+              return "x = "+flex_coeff+"y + "+(x_answer - y_answer*flex_coeff);
+            else
+              return "y = "+flex_coeff+"x + "+(y_answer - x_answer*flex_coeff);
+          }
+          else if (setting2.checked){
+             
+              let x2_coeff =  Math.floor(Math.random() * MAX_COEFF)+1;
+              let y2_coeff =  Math.floor(Math.random() * MAX_COEFF)+1;
+          	 return x2_coeff+"x + "+y2_coeff+"y = "+(x2_coeff*x_answer+y2_coeff*y_answer);
+          }else{
+             return setting1.isChecked + setting2.isChecked;
+          }
         }
         function checkSolution() {
             return (n1.value == x_answer && n2.value == y_answer);
+        }
+        function newProblem(){
+
+                n1.value = "";
+                n2.value = "";
+                n1.focus();
+                eq.innerHTML = generateEq(); 
+                eq2.innerHTML = generateEq2(); 
+        
         }
 
         function doCheck() {
@@ -178,11 +196,12 @@
                     document.getElementById("streak").hidden = false;
                     streakNum.innerHTML = streak;
                 }
-                n1.value = "";
-                n2.value = "";
-                n1.focus();
-                eq.innerHTML = generateEq(); 
-                eq2.innerHTML = generateEq2(); 
+                newProblem();
+                //n1.value = "";
+               // n2.value = "";
+               // n1.focus();
+               // eq.innerHTML = generateEq(); 
+               // eq2.innerHTML = generateEq2(); 
                 document.getElementById("points").innerHTML = score;
             } else {
                 streak = 0;        
@@ -216,9 +235,10 @@
             span.onclick = function () {
                 modal.style.display = "none";
             }
-            eq.innerHTML = generateEq();
-            eq2.innerHTML = generateEq2();
-            n1.focus();
+            newProblem();
+           // eq.innerHTML = generateEq();
+           // eq2.innerHTML = generateEq2();
+           // n1.focus();
             if (isMobile()) {
                 //not implemented yet
             }
@@ -272,20 +292,20 @@
         <div class="modal-content">
             <span class="close">&times;</span>
             <div>
-                <input type="checkbox" id="setting0" name="pos-neg" value="lewy">
+                <input type="checkbox" id="setting0" name="pos-neg" value="lewy" onclick="newProblem()">
                 <label for="setting2">Include negatives?</label>
             </div>
 
             <br>
 
             <div>
-                <input type="radio" id="setting1" name="a-val" value="huey" checked>
-                <label for="setting1">a = 1</label>
+                <input type="radio" id="setting1" name="a-val" value="huey" onclick="newProblem()" checked>
+                <label for="setting1">Isolate a variable for me</label>
             </div>
 
             <div>
-                <input type="radio" id="setting2" name="a-val" value="dewey">
-                <label for="setting2">1 <= a <= 10</label>
+                <input type="radio" id="setting2" name="a-val" value="dewey" onclick="newProblem()">
+                <label for="setting2">Make me isolate the variable</label>
             </div>
         </div>
     </div>
