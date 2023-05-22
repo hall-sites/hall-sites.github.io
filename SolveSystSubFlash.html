@@ -166,9 +166,16 @@
               return "y = "+flex_coeff+"x + "+(y_answer - x_answer*flex_coeff);
           }
           else if (setting2.checked){
-             
-              let x2_coeff =  Math.floor(Math.random() * MAX_COEFF)+1;
-              let y2_coeff =  Math.floor(Math.random() * MAX_COEFF)+1;
+							let x2_coeff = 0;
+							let y2_coeff = 0; 
+              if (Math.random() < .5){
+                x2_coeff =  Math.floor(Math.random() * MAX_COEFF)+1;
+                y2_coeff = 1;
+              }
+              else{
+                x2_coeff = 1;
+                y2_coeff =  Math.floor(Math.random() * MAX_COEFF)+1;
+              }
           	 return x2_coeff+"x + "+y2_coeff+"y = "+(x2_coeff*x_answer+y2_coeff*y_answer);
           }else{
              return setting1.isChecked + setting2.isChecked;
@@ -185,6 +192,11 @@
                 eq.innerHTML = generateEq(); 
                 eq2.innerHTML = generateEq2(); 
         
+        }
+        
+        function tellAnswer(){
+                Swal.fire("The answer was ("+x_answer+" ,"+y_answer+").");
+                newProblem();
         }
 
         function doCheck() {
@@ -284,6 +296,10 @@
             <br>
             <button id="check" onclick="doCheck()">
                 CHECK
+            </button>
+            
+            <button id="giveUp" onclick="tellAnswer()">
+                I GIVE UP
             </button>
         </div>
     </div>
