@@ -1,6 +1,8 @@
 title: HallSites
 author: Hall
 
+markdown: kramdown
+
 # Reading Files
 include:
   - _pages
