@@ -58,6 +58,7 @@ function mousePressed() {
         let rotatedX = cosA * dx + sinA * dy;
         let rotatedY = -sinA * dx + cosA * dy;
         if (rotatedX > -t.w/2 && rotatedX < t.w/2 && rotatedY > -t.h/2 && rotatedY < t.h/2) {
+            if (triangles[i].deleted) continue;
             if (selectedTriangle != null && selectedTriangle != t && areCongruent(t, selectedTriangle)) {
                 t.deleted = true;
                 selectedTriangle.deleted = true;
