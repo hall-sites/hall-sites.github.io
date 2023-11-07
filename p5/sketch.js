@@ -49,7 +49,7 @@ let selectedTriangle = null;
 let score = 0;
 
 function mousePressed() {
-    for (let i = 0; i < triangles.length; i++) {
+    for (let i = triangles.length - 1; i <= 0; i--) {
         let t = triangles[i];
         let cosA = Math.cos(t.angle);
         let sinA = Math.sin(t.angle);
