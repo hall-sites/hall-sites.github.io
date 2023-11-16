@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Flux Calculator</title>
+        <script src="./p5.min.js"></script>
+        <script src="./sketch.js" defer></script>
+        <link rel="stylesheet" href="./style.css">
+        <script src="https://cdn.tailwindcss.com"></script>
+    </head>
+    <body class="dark">
+        <br>
+        <h1 class="text-3xl">Flux Calculator&trade; from ShadowPizza labs</h1>
+        <br>
+        <div id="canv-parent"></div>
+        <br><br>
+        <div class="ml-[10%] w-1/2 mr-[10%] float-left">
+            XYZ Sliders:
+            <!-- <label for="slider1" class="block mb-2 text-sm font-medium text-gray-900">X:</label> -->
+            <input type="range" id="slider1" name="slider1" min="-200" max="200" class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer dark:bg-gray-700"><br><br>
+            <!-- <label for="slider2" class="block mb-2 text-sm font-medium text-gray-900">Y:</label> -->
+            <input type="range" id="slider2" name="slider2" min="-200" max="200" class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer dark:bg-gray-700"><br><br>
+            <!-- <label for="slider3" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Z:</label> -->
+            <input type="range" id="slider3" name="slider3" min="-200" max="200" class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer dark:bg-gray-700"><br><br>
+        </div>
+        <div class="text-left text-l float-right mr-[20%]">
+            Num Arrows: <input type="number" max="20" min="1" value="3" id="numArrows" class="border">
+            <hr class="w-20">
+            <br>
+            Face 1: <span id="face1-value">0</span>
+            <br>
+            Face 2: <span id="face2-value">0</span>
+            <br>
+            Face 3: <span id="face3-value">0</span>
+            <br>
+            Face 4: <span id="face4-value">0</span>
+            <br>
+            Face 5: <span id="face5-value">0</span>
+            <br>
+            Face 6: <span id="face6-value">0</span>
+            <br>
+        </div>
+        <br style="clear:both">
+        <br><br>
+        <h3 class="text-center">&reg; &copy; ShadowPizza&trade; labs&trade; 2023&trade;</h3>
+        <br><br>
+    </body>
+</html>
