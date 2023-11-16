@@ -42,15 +42,33 @@ function drawBox() {
   pop();
 }
 
+function drawCone(pos, dir) {
+  push();
+  translate(pos);
+  const tangent = dir.copy().normalize();
+  const up = tangent.x === 0 && tangent.z === 0 
+    ? new p5.Vector(1, 0, 0) 
+    : new p5.Vector(0, 1, 0);
+  const right = up.cross(tangent).normalize();
+  const forward = right.cross(tangent);
+  applyMatrix(
+    right.x, right.y, right.z, 0,
+    tangent.x, tangent.y, tangent.z, 0,
+    forward.x, forward.y, forward.z, 0,
+    0, 0, 0, 1
+  );
+  cone(3, 9);
+  pop();
+}
+
 function drawLines() {
   let charge = chargePos();
   let fluxValue = 0;
   let faceValue = 0;
   let faceNum = 1;
 
-  let ARROWS = document.getElementById("numArrows").value;
   let FACES = document.getElementById("numArrows").value;
-  let SUB_SIZE = BOX_SIZE / ARROWS;
+  let SUB_SIZE = BOX_SIZE / FACES;
 
   for (let sign of [-1, 1]) {
     for (let axis of AXES) {
@@ -95,8 +113,8 @@ function drawLines() {
         rotateZ(PI);
       pop();
 
-      for (let h = 0; h < ARROWS; h++) {
-        for (let k = 0; k < ARROWS; k++) {
+      for (let h = 0; h < FACES; h++) {
+        for (let k = 0; k < FACES; k++) {
           let start = corner.copy();
           start.add(p5.Vector.mult(others[0], h * SUB_SIZE));
           start.add(p5.Vector.mult(others[1], k * SUB_SIZE));
@@ -120,20 +138,7 @@ function drawLines() {
 
           // normal cone
           fill(255, 0, 0);
-          push();
-          translate(endNorm);
-          let tangentNorm = p5.Vector.sub(endNorm, start).normalize();
-          let upNorm = tangentNorm.x === 0 && tangentNorm.z === 0 ? new p5.Vector(1, 0, 0) : new p5.Vector(0, 1, 0);
-          let rightNorm = upNorm.cross(tangentNorm).normalize();
-          let depthNorm = rightNorm.cross(tangentNorm);
-          applyMatrix(
-            rightNorm.x, rightNorm.y, rightNorm.z, 0,
-            tangentNorm.x, tangentNorm.y, tangentNorm.z, 0,
-            depthNorm.x, depthNorm.y, depthNorm.z, 0,
-            0, 0, 0, 1
-          );
-          cone(3, 9);
-          pop();
+          drawCone(endNorm, p5.Vector.sub(endNorm, start));
 
           // outward line
           let endOut = p5.Vector.add(start, p5.Vector.setMag(toStart, magOut));
@@ -142,20 +147,7 @@ function drawLines() {
 
           // outward cone
           fill(0, 0, 255);
-          push();
-          translate(endOut);
-          const tangent = toStart.copy().normalize();
-          const up = createVector(0, 1, 0);
-          const right = up.cross(tangent).normalize();
-          const forward = right.cross(tangent);
-          applyMatrix(
-            right.x, right.y, right.z, 0,
-            tangent.x, tangent.y, tangent.z, 0,
-            forward.x, forward.y, forward.z, 0,
-            0, 0, 0, 1
-          );
-          cone(3, 9);
-          pop();
+          drawCone(endOut, toStart);
         }
       }
       document.getElementById("face" + faceNum + "-value").innerHTML = faceValue.toFixed(2);
