@@ -10,7 +10,7 @@ const AXES = [
 ]
 
 function setup() {
-  var canvas = createCanvas(WIDTH, HEIGHT, WEBGL);
+  let canvas = createCanvas(WIDTH, HEIGHT, WEBGL);
   canvas.parent("canv-parent");
   strokeWeight(2); // border thickness
   frameRate(60);
@@ -61,6 +61,10 @@ function drawCone(pos, dir) {
   pop();
 }
 
+function offset(base, axis, mag) {
+  return p5.Vector.add(base, p5.Vector.mult(axis, mag));
+}
+
 function drawLines() {
   let charge = chargePos();
   let fluxValue = 0;
@@ -77,29 +81,29 @@ function drawLines() {
       let corner = center.copy();
       
       for (let other of others) {
-        corner.add(p5.Vector.mult(other, -BOX_RADIUS));
+        corner = offset(corner, other, -BOX_RADIUS);
       }
 
       // drawing sub-squares
       stroke(100, 100, 100);
 
       let top = corner.copy()
-      let bottom = p5.Vector.add(corner, p5.Vector.mult(others[1], BOX_SIZE));
+      let bottom = offset(corner, others[1], BOX_SIZE);
       let left = corner.copy();
-      let right = p5.Vector.add(left, p5.Vector.mult(others[0], BOX_SIZE))
+      let right = offset(left, others[0], BOX_SIZE);
 
       for (let i = 0; i < FACES - 1; i++) {
-        top.add(p5.Vector.mult(others[0], SUB_SIZE));
-        bottom.add(p5.Vector.mult(others[0], SUB_SIZE));
-        left.add(p5.Vector.mult(others[1], SUB_SIZE));
-        right.add(p5.Vector.mult(others[1], SUB_SIZE));
+        top = offset(top, others[0], SUB_SIZE);
+        bottom = offset(bottom, others[0], SUB_SIZE);
+        left = offset(left, others[1], SUB_SIZE);
+        right = offset(right, others[1], SUB_SIZE);
         line(top.x, top.y, top.z, bottom.x, bottom.y, bottom.z);
         line(left.x, left.y, left.z, right.x, right.y, right.z);
       }
 
       // moving corner to first start
       for (let other of others) {
-        corner.add(p5.Vector.mult(other, SUB_SIZE / 2));
+        corner = offset(corner, other, SUB_SIZE / 2);
       }
 
       // face nums
@@ -116,8 +120,8 @@ function drawLines() {
       for (let h = 0; h < FACES; h++) {
         for (let k = 0; k < FACES; k++) {
           let start = corner.copy();
-          start.add(p5.Vector.mult(others[0], h * SUB_SIZE));
-          start.add(p5.Vector.mult(others[1], k * SUB_SIZE));
+          start = offset(start, others[0], h * SUB_SIZE);
+          start = offset(start, others[1], k * SUB_SIZE);
           let toStart = p5.Vector.sub(start, charge);
 
           let theta = center.angleBetween(toStart);
