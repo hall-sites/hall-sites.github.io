@@ -1,6 +1,7 @@
 const WIDTH = window.visualViewport.width * 0.96;
 const HEIGHT = 800;
-let BOX_SIZE = 200;
+const BOX_SIZE = 200;
+const BOX_RADIUS = BOX_SIZE / 2;
 
 const AXES = [
   new p5.Vector(1, 0, 0),
@@ -48,7 +49,7 @@ function drawLines() {
   let faceNum = 1;
 
   let ARROWS = document.getElementById("numArrows").value;
-  let BOX_RADIUS = BOX_SIZE / 2;
+  let FACES = document.getElementById("numArrows").value;
   let SUB_SIZE = BOX_SIZE / ARROWS;
 
   for (let sign of [-1, 1]) {
@@ -56,10 +57,34 @@ function drawLines() {
       let center = p5.Vector.mult(axis, BOX_RADIUS * sign);
       let others = AXES.filter(a => a !== axis);
       let corner = center.copy();
+      
       for (let other of others) {
-        corner.add(p5.Vector.mult(other, -(BOX_RADIUS - SUB_SIZE / 2)));
+        corner.add(p5.Vector.mult(other, -BOX_RADIUS));
       }
 
+      // drawing sub-squares
+      stroke(100, 100, 100);
+
+      let top = corner.copy()
+      let bottom = p5.Vector.add(corner, p5.Vector.mult(others[1], BOX_SIZE));
+      let left = corner.copy();
+      let right = p5.Vector.add(left, p5.Vector.mult(others[0], BOX_SIZE))
+
+      for (let i = 0; i < FACES - 1; i++) {
+        top.add(p5.Vector.mult(others[0], SUB_SIZE));
+        bottom.add(p5.Vector.mult(others[0], SUB_SIZE));
+        left.add(p5.Vector.mult(others[1], SUB_SIZE));
+        right.add(p5.Vector.mult(others[1], SUB_SIZE));
+        line(top.x, top.y, top.z, bottom.x, bottom.y, bottom.z);
+        line(left.x, left.y, left.z, right.x, right.y, right.z);
+      }
+
+      // moving corner to first start
+      for (let other of others) {
+        corner.add(p5.Vector.mult(other, SUB_SIZE / 2));
+      }
+
+      // face nums
       push();
       fill(90, 255, 90);
       translate(p5.Vector.mult(axis, 100 * sign));
@@ -133,8 +158,6 @@ function drawLines() {
           pop();
         }
       }
-      console.log(faceNum);
-      console.log("face" + faceNum + "-val");
       document.getElementById("face" + faceNum + "-value").innerHTML = faceValue.toFixed(2);
       faceNum++;
       faceValue = 0;
