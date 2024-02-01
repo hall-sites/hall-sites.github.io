@@ -70,6 +70,7 @@ function drawLines() {
   let fluxValue = 0;
   let faceValue = 0;
   let faceNum = 1;
+  let html_string = "<table class='table-fixed border w-full'><tr><th>Face&nbsp;&nbsp;</th><th>Row&nbsp;&nbsp;</th><th>Column&nbsp;&nbsp;</th><th>Ecos(Theta)&nbsp;&nbsp;</th><th>E&nbsp;&nbsp;</th><th>Theta&nbsp;&nbsp;</th><th>Flux&nbsp;&nbsp;</th></tr>";
 
   let FACES = document.getElementById("numArrows").value;
   let SUB_SIZE = BOX_SIZE / FACES;
@@ -152,9 +153,20 @@ function drawLines() {
           // outward cone
           fill(0, 0, 255);
           drawCone(endOut, toStart);
+          html_string += `
+            <tr>
+              <td>${faceNum}</td>
+              <td>${h + 1}</td>
+              <td>${k + 1}</td>
+              <td>${magNorm.toFixed(2)}</td>
+              <td>${magOut.toFixed(2)}</td>
+              <td>${(theta * 180 / Math.PI).toFixed(2)}</td>
+              <td>${(magNorm / Math.pow(FACES, 2)).toFixed(2)}</td>
+            </tr>
+          `;
         }
       }
-      document.getElementById("face" + faceNum + "-value").innerHTML = faceValue.toFixed(2);
+      document.getElementById("face" + faceNum + "-value").innerHTML = html_string + "</table>";
       faceNum++;
       faceValue = 0;
     }
