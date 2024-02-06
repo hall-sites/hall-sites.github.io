@@ -119,6 +119,7 @@ function drawLines() {
       pop();
 
       for (let h = 0; h < FACES; h++) {
+        let faceFlux = 0;
         for (let k = 0; k < FACES; k++) {
           let start = corner.copy();
           start = offset(start, others[0], h * SUB_SIZE);
@@ -165,7 +166,7 @@ function drawLines() {
           `;
         }
       }
-      document.getElementById("face" + faceNum + "-value").innerHTML = html_string + "</table>" + `<div class='border w-full p-3'>ΣFlux = ${(fluxValue / (FACES * FACES)).toFixed(2)}</div>`;
+      document.getElementById("face" + faceNum + "-value").innerHTML = html_string + "</table>" + `<div class='border w-full p-3'>ΣFlux = ${(faceValue / (FACES * FACES)).toFixed(2)}</div>`;
       html_string = "<table class='table-fixed border w-full'><tr><th>Row&nbsp;&nbsp;</th><th>Column&nbsp;&nbsp;</th><th>Ecos(Theta)&nbsp;&nbsp;</th><th>E&nbsp;&nbsp;</th><th>Theta&nbsp;&nbsp;</th><th>Flux&nbsp;&nbsp;</th></tr>";
       faceNum++;
       faceValue = 0;
