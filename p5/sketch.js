@@ -128,7 +128,7 @@ function drawLines() {
 
           let theta = center.angleBetween(toStart);
           let r = charge.dist(start);
-          let Q = 20e-10;
+          let Q = 20e-9;
           let A = SUB_SIZE ** 2;
           let e0 = 8.85e-12;
 
