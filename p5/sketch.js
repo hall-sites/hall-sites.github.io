@@ -1,6 +1,6 @@
 const WIDTH = window.visualViewport.width * 0.96;
 const HEIGHT = 800;
-const BOX_SIZE = 200;
+const BOX_SIZE = 1000;
 const BOX_RADIUS = BOX_SIZE / 2;
 
 const AXES = [
@@ -128,7 +128,7 @@ function drawLines() {
 
           let theta = center.angleBetween(toStart);
           let r = charge.dist(start);
-          let Q = 20e-9;
+          let Q = 20e-10;
           let A = SUB_SIZE ** 2;
           let e0 = 8.85e-12;
 
@@ -166,7 +166,7 @@ function drawLines() {
           `;
         }
       }
-      document.getElementById("face" + faceNum + "-value").innerHTML = html_string + "</table>" + `<div class='border w-full p-3'>ΣFlux = ${fluxValue.toFixed(2)}</div>`;
+      document.getElementById("face" + faceNum + "-value").innerHTML = html_string + "</table>" + `<div class='border w-full p-3'>ΣFlux = ${faceValue.toFixed(2)}</div>`;
       html_string = "<table class='table-fixed border w-full'><tr><th>Row&nbsp;&nbsp;</th><th>Column&nbsp;&nbsp;</th><th>Ecos(Theta)&nbsp;&nbsp;</th><th>E&nbsp;&nbsp;</th><th>Theta&nbsp;&nbsp;</th><th>Flux&nbsp;&nbsp;</th></tr>";
       faceNum++;
       faceValue = 0;
