@@ -158,10 +158,10 @@ function drawLines() {
             <tr>
               <td>${h + 1}</td>
               <td>${k + 1}</td>
-              <td>${magNorm.toFixed(2)}</td>
-              <td>${magOut.toFixed(2)}</td>
-              <td>${(theta * 180 / Math.PI).toFixed(2)}</td>
-              <td>${(magNorm / Math.pow(FACES, 2)).toFixed(2)}</td>
+              <td>${(magNorm * A).toFixed(2)}</td>
+              <td>${(magOut * A).toFixed(2)}</td>
+              <td>${(theta * 180 / Math.PI).toFixed(2)}&deg;</td>
+              <td>${(magNorm).toFixed(2)}</td>
             </tr>
           `;
         }
