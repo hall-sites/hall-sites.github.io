@@ -1,6 +1,6 @@
 const WIDTH = window.visualViewport.width * 0.96;
 const HEIGHT = 800;
-const BOX_SIZE = 1000;
+const BOX_SIZE = 200;
 const BOX_RADIUS = BOX_SIZE / 2;
 
 const AXES = [
