@@ -2,6 +2,7 @@ const WIDTH = window.visualViewport.width * 0.96;
 const HEIGHT = 800;
 const BOX_SIZE = 200;
 const BOX_RADIUS = BOX_SIZE / 2;
+let faceFluxes = [0, 0, 0, 0, 0, 0];
 
 const AXES = [
   new p5.Vector(1, 0, 0),
@@ -166,6 +167,7 @@ function drawLines() {
           `;
         }
       }
+      faceFluxes[faceNum - 1] = faceValue.toFixed(2);
       document.getElementById("face" + faceNum + "-value").innerHTML = html_string + "</table>" + `<div class='border w-full p-3'>ΣFlux = ${faceValue.toFixed(2)}</div>`;
       html_string = "<table class='table-fixed border w-full'><tr><th>Row&nbsp;&nbsp;</th><th>Column&nbsp;&nbsp;</th><th>Ecos(Theta)&nbsp;&nbsp;</th><th>E&nbsp;&nbsp;</th><th>Theta&nbsp;&nbsp;</th><th>Flux&nbsp;&nbsp;</th></tr>";
       faceNum++;
@@ -184,4 +186,6 @@ function draw() {
   drawCharge();
   fill(255, 0, 0);
   noStroke();
+  let disp = document.getElementById("face-fluxes");
+  disp.innerText = faceFluxes.map((flux, i) => "Face " + (i + 1) + ": " + flux).join(", ");
 }
