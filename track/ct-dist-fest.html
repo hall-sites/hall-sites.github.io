@@ -75,8 +75,9 @@
         const seconds = parseFloat(timeComponents[1]);
 
         const totalTimeInSeconds = minutes * 60 + seconds;
-        if (distanceSelect == "5000_wickham")
+        if (distanceSelect == "5000_wickham"){
             totalTimeInSeconds = totalTimeInSeconds - 55;
+        }
         const mileSeed = totalTimeInSeconds * conversionFactors[distanceSelect];
         
         let mins = Math.floor(mileSeed / 60);
@@ -101,8 +102,9 @@
         };
         
         const fiveKSeed = totalTimeInSeconds * conversionFactors5k[distanceSelect]; 
-        if (distanceSelect == "5000_wickham")
+        if (distanceSelect == "5000_wickham"){
             fiveKSeed = fiveKSeed - 45;
+        }
         let mins5k = Math.floor(fiveKSeed / 60);
         let secs5k = (fiveKSeed % 60).toFixed(2);
         if (secs5k < 10) {
