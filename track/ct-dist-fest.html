@@ -74,7 +74,7 @@
         const minutes = parseInt(timeComponents[0]);
         const seconds = parseFloat(timeComponents[1]);
 
-        const totalTimeInSeconds = minutes * 60 + seconds;
+        let totalTimeInSeconds = minutes * 60 + seconds;
         if (distanceSelect == "5000_wickham"){
             totalTimeInSeconds = totalTimeInSeconds - 55;
         }
