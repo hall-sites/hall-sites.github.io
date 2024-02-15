@@ -67,7 +67,7 @@
             '3000': 0.5,
             '3200': 0.46568,
             '5000_track': 0.2924,
-            '5000_wickham': 0.27647
+            '5000_wickham': 0.2924
         };
 
         const timeComponents = timeInput.split(":");
@@ -75,7 +75,10 @@
         const seconds = parseFloat(timeComponents[1]);
 
         const totalTimeInSeconds = minutes * 60 + seconds;
+        if (distanceSelect == "5000_wickham")
+            totalTimeInSeconds = totalTimeInSeconds - 55;
         const mileSeed = totalTimeInSeconds * conversionFactors[distanceSelect];
+        
         let mins = Math.floor(mileSeed / 60);
         let secs = (mileSeed % 60).toFixed(2);
         if (secs < 10) {
@@ -94,10 +97,12 @@
             '3000': 0.5 / .2924,
             '3200': 0.46568 / .2924,
             '5000_track': 0.2924 / .2924,
-            '5000_wickham': 0.27647 / .2924
+            '5000_wickham': 0.2924 / .2924
         };
         
         const fiveKSeed = totalTimeInSeconds * conversionFactors5k[distanceSelect]; 
+        if (distanceSelect == "5000_wickham")
+            fiveKSeed = fiveKSeed - 45;
         let mins5k = Math.floor(fiveKSeed / 60);
         let secs5k = (fiveKSeed % 60).toFixed(2);
         if (secs5k < 10) {
