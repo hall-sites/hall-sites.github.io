@@ -33,8 +33,13 @@
     </div>
 
     <div class="mb-4">
-        <label for="mileSeed" class="block text-gray-700 font-semibold mb-2">Use this in your Mile seed:</label>
+        <label for="mileSeed" class="block text-gray-700 font-semibold mb-2">Use this as your Mile seed:</label>
         <input type="text" id="mileSeed" class="block w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" readonly>
+    </div>
+    
+    <div class="mb-4">
+        <label for="fiveKSeed" class="block text-gray-700 font-semibold mb-2">Use this as your 5k seed:</label>
+        <input type="text" id="fiveKSeed" class="block w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" readonly>
     </div>
 
     <p class="text-sm text-gray-600 mb-4">Questions/Concerns - Email <a href="mailto:Jeff_Billing@whps.org" class="text-blue-500">Jeff_Billing@whps.org</a></p>
@@ -75,6 +80,14 @@
         	secs = '0' + secs;
         }
         document.getElementById('mileSeed').value = mins + ':' + secs;
+        
+        const fiveKSeed = mileSeed /.2924;
+        let mins5k = Math.floor(fiveKSeed / 60);
+        let secs5k = (fiveKSeed % 60).toFixed(2);
+        if (secs5k < 10) {
+        	secs5k = '0' + secs5k;
+        }
+        document.getElementById('fiveKSeed').value = mins5k + ':' + secs5k;
     }
 </script>
 
