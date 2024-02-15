@@ -42,6 +42,7 @@
         <input type="text" id="fiveKSeed" class="block w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" readonly>
     </div>
 
+    <p class="text-sm text-gray-600 mb-4">Enter this seed time on Athletic.Net with a comment:  "Used Distance Fest Converter from 4:43 1600 PR <i>(needs Jon edit)</i>"</a></p>
     <p class="text-sm text-gray-600 mb-4">Questions/Concerns - Email <a href="mailto:Jeff_Billing@whps.org" class="text-blue-500">Jeff_Billing@whps.org</a></p>
     <p class="text-sm text-gray-600 mb-4">Need a website? Talk to Jon York - <a href="mailto:york.jon.2005@gmail.com" class="text-blue-500">york.jon.2005@gmail.com</a></p>
 </div>
@@ -81,7 +82,7 @@
         }
         document.getElementById('mileSeed').value = mins + ':' + secs;
         
-        const fiveKSeed = mileSeed /.2924;
+        const fiveKSeed = mileSeed /.2924; // will edit this conversion 
         let mins5k = Math.floor(fiveKSeed / 60);
         let secs5k = (fiveKSeed % 60).toFixed(2);
         if (secs5k < 10) {
