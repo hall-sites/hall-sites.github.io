@@ -102,9 +102,7 @@
         };
         
         const fiveKSeed = totalTimeInSeconds * conversionFactors5k[distanceSelect]; 
-        if (distanceSelect == "5000_wickham"){
-            fiveKSeed = fiveKSeed - 45;
-        }
+
         let mins5k = Math.floor(fiveKSeed / 60);
         let secs5k = (fiveKSeed % 60).toFixed(2);
         if (secs5k < 10) {
