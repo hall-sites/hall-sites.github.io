@@ -171,7 +171,12 @@
                         if (coeff > -1) {
                             qhtml += "+";
                         }
-                        qhtml += `${coeff}`;
+                        if (coeff == 1 && x) {
+                        } else if (coeff == -1 && x){
+                            qhtml += "-";
+                        } else {
+                            qhtml += `${coeff}`;
+                        }
                         if (x) {
                             qhtml += `x`;
                             if (x != 1) {
