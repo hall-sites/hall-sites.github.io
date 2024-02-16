@@ -30,8 +30,8 @@
             width: fit-content;
             border-color: purple;
             border-style: solid;
-            border-left-width: 50px;
-            border-right-width: 50px;
+            border-left-width: 10px;
+            border-right-width: 10px;
             border-top-width: 1px;
             border-bottom-width: 1px;
             border-radius: 30px;
@@ -67,20 +67,38 @@
         }
     </style>
     <script>
-        onload => {
+        onload = () => {
             const question = document.querySelector(".question");
             let answer = null;
             function generate() {
                 const degree = Math.floor(Math.random()*5+2);
+                console.log(degree);
                 const coeffs = [];
                 let qhtml = "";
-                for (let x = degree; x > 0; x--) {
-                    coeffs += [Math.floor(Math.random()*19 - 9)];
+                for (let x = degree; x >= 0; x--) {
+                    const coeff = Math.floor(Math.random()*19 - 9);
+                    coeffs.push(coeff);
                     if (x == degree && !coeffs[0]) {
                         coeffs[0] = 10;
                     }
-                }   
+                    if (coeff) {
+                        qhtml += `${coeff}`;
+                        if (x) {
+                            qhtml += `x`;
+                            if (x != 1) {
+                                qhtml += `<sup>${x}</sup>`;
+                            }
+                            qhtml += `+`;
+                        }
+                    }
+                }
+                if (qhtml.substring(qhtml.length - 1) == "+") {
+                    qhtml = qhtml.substring(0, qhtml.length - 1);
+                }
+                question.innerHTML = qhtml;
+                answer = {degree, leadingCoeff: coeffs[0]};
             }
+            generate();
         }
     </script>
     <body>
