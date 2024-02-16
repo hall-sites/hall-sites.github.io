@@ -39,6 +39,8 @@
         }
         .question {
             font-size: 60pt;
+            margin-top: 10pt;
+            margin-bottom: 10pt;
         }
         .answers {
             background-color: navy;
@@ -63,7 +65,7 @@
             color: white;
             font-family: "Comic Sans MS", sans-serif;
             font-size: 24pt;
-            width: 4em;
+            width: 2em;
         }
         .statsbar {
             position:relative;
@@ -95,15 +97,23 @@
         }
         #status-lc {
             display: none;
+            margin: 0;
         }
         #status-deg {
             display: none;
+            margin: 0;
+        }
+        input.incorrect {
+            background-color: #f00a;
+        }
+        input.correct {
+            background-color: #0f0a;
         }
         .answers[check-answers] #status-lc {
-            display: block;
+            display: inline-block;
         }
         .answers[check-answers] #status-deg {
-            display: block;
+            display: inline-block;
         }
         .answer {
             margin-bottom: 20px;
@@ -162,19 +172,25 @@
                 const deg_guess = dg.value;
                 if (coeff_guess == answer.leadingCoeff) {
                     slc.textContent = "✅";
+                    lc.classList.add("correct");
                 } else {
                     slc.textContent = `❌ ${answer.leadingCoeff}`;
+                    lc.classList.add("incorrect");
                 }
                 if (deg_guess == answer.degree) {
                     sdg.textContent = "✅";
+                    dg.classList.add("correct");
                 } else {
                     sdg.textContent = `❌ ${answer.degree}`;
+                    dg.classList.add("incorrect");
                 }
             }
             function clear() {
                 lc.removeAttribute("disabled");
                 dg.removeAttribute("disabled");
                 ans.removeAttribute("check-answers");
+                lc.removeAttribute("class");
+                dg.removeAttribute("class");
                 lc.value = "";
                 dg.value = "";
             }
@@ -219,7 +235,7 @@
             </div>
             <div class="answer">
                 <label for="degree">What is the degree of this polynomial? </label>
-                <input type="number" name="degree" checked="0">
+                <input type="number" name="degree">
                 <p id="status-deg"></p>
             </div>
             <br />
