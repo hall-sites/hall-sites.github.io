@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Guess the coefficient!</title>
+    </head>
+    <style>
+        body {
+            background-color: #111;
+            color: white;
+            font-family: "Comic Sans MS", sans-serif;
+        }
+        h1 {
+            font-size: 42pt;
+        }
+        .title-box {
+            width: 75%;
+            position: relative;
+            left: 0;
+            right: 0;
+            top: 0;
+            margin: auto;
+            text-align: center;
+        }
+        .question-box {
+            background-color: purple;
+            left: 0;
+            right: 0;
+            margin: auto;
+            position: relative;
+            width: fit-content;
+            border-color: purple;
+            border-style: solid;
+            border-left-width: 50px;
+            border-right-width: 50px;
+            border-top-width: 1px;
+            border-bottom-width: 1px;
+            border-radius: 30px;
+            box-shadow: green 0px 0px 20px;
+        }
+        .question {
+            font-size: 72pt;
+        }
+        .answers {
+            background-color: navy;
+            left: 0;
+            right: 0;
+            margin: auto;
+            width: fit-content;
+            border-color: navy;
+            border-style: solid;
+            border-left-width: 50px;
+            border-right-width: 50px;
+            border-top-width: 20px;
+            border-bottom-width: 20px;
+            border-radius: 30px;
+            box-shadow: green 0px 0px 20px;
+            font-size: 24pt;
+        }
+        input[type="number"] {
+            background-color: #002;
+            border-radius: 20px;
+            border-color: #00000000;
+            color: white;
+            font-family: "Comic Sans MS", sans-serif;
+            font-size: 24pt;
+            width: 4em;
+        }
+    </style>
+    <script>
+        onload => {
+            const question = document.querySelector(".question");
+            let answer = null;
+            function generate() {
+                const degree = Math.floor(Math.random()*5+2);
+                const coeffs = [];
+                let qhtml = "";
+                for (let x = degree; x > 0; x--) {
+                    coeffs += [Math.floor(Math.random()*19 - 9)];
+                    if (x == degree && !coeffs[0]) {
+                        coeffs[0] = 10;
+                    }
+                }   
+            }
+        }
+    </script>
+    <body>
+        <div class="title-box">
+            <h1>Guess the coefficient!</h1>
+        </div>
+        <hr />
+        <br />
+        <br />
+        <div class="question-box">
+            <p class="question">Meep<sup>meep</sup></p>
+        </div>
+        <br />
+        <br />
+        <div class="answers">
+            <label for="leading-coeff">What is the leading coefficient of this polynomial? </label>
+            <input type="number" name="leading-coeff">
+            <br />
+            <br />
+            <label for="degree">What is the degree of this polynomial? </label>
+            <input type="number" name="degree">
+        </div>
+    </body>
+</html>
