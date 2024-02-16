@@ -38,7 +38,7 @@
             box-shadow: green 0px 0px 20px;
         }
         .question {
-            font-size: 72pt;
+            font-size: 60pt;
         }
         .answers {
             background-color: navy;
@@ -65,14 +65,65 @@
             font-size: 24pt;
             width: 4em;
         }
+        .statsbar {
+            position:relative;
+            width: 70%;
+            text-align: center;
+            left: 0;
+            bottom: 0;
+            right: 0;
+            margin: auto;
+            text-align: center;
+        }
+        button {
+            background-color: #002;
+            color: white;
+            border-color: #002;
+            border-style: solid;
+            border-width: 20px;
+            border-radius: 10px;
+            font-family: "Comic Sans MS", sans-serif;
+            font-size: 24pt;
+        }
+        button:hover {
+            background-color: #004;
+            border-color: #004;
+        }
+        button:active {
+            background-color: #001;
+            border-color: #001;
+        }
+        #status-lc {
+            display: none;
+        }
+        #status-deg {
+            display: none;
+        }
+        .answers[check-answers] #status-lc {
+            display: block;
+        }
+        .answers[check-answers] #status-deg {
+            display: block;
+        }
+        .answer {
+            margin-bottom: 20px;
+        }
     </style>
     <script>
         onload = () => {
+            let state = 0;
             const question = document.querySelector(".question");
+            const ca = document.querySelector("#ca");
+            const nq = document.querySelector("#nq");
+            const lc = document.querySelector("[name='leading-coeff']");
+            const dg = document.querySelector("[name='degree']");
+            const slc = document.querySelector("#status-lc");
+            const sdg = document.querySelector("#status-deg");
+            const ans = document.querySelector(".answers");
             let answer = null;
             function generate() {
+                clear();
                 const degree = Math.floor(Math.random()*5+2);
-                console.log(degree);
                 const coeffs = [];
                 let qhtml = "";
                 for (let x = degree; x >= 0; x--) {
@@ -82,23 +133,70 @@
                         coeffs[0] = 10;
                     }
                     if (coeff) {
+                        if (coeff > -1) {
+                            qhtml += "+";
+                        }
                         qhtml += `${coeff}`;
                         if (x) {
                             qhtml += `x`;
                             if (x != 1) {
                                 qhtml += `<sup>${x}</sup>`;
                             }
-                            qhtml += `+`;
                         }
                     }
                 }
-                if (qhtml.substring(qhtml.length - 1) == "+") {
-                    qhtml = qhtml.substring(0, qhtml.length - 1);
+                if (qhtml.substring(0, 1) == "+") {
+                    qhtml = qhtml.substring(1);
                 }
                 question.innerHTML = qhtml;
                 answer = {degree, leadingCoeff: coeffs[0]};
+                lc.focus({focusVisible: true});
             }
+            function checkAnswer() {
+                document.querySelector(".title-box").style.display = "none";
+                document.querySelector("hr").style.display = "none";
+                lc.setAttribute("disabled", 1);
+                dg.setAttribute("disabled", 1);
+                ans.setAttribute("check-answers", 1);
+                const coeff_guess = lc.value;
+                const deg_guess = dg.value;
+                if (coeff_guess == answer.leadingCoeff) {
+                    slc.textContent = "✅";
+                } else {
+                    slc.textContent = `❌ ${answer.leadingCoeff}`;
+                }
+                if (deg_guess == answer.degree) {
+                    sdg.textContent = "✅";
+                } else {
+                    sdg.textContent = `❌ ${answer.degree}`;
+                }
+            }
+            function clear() {
+                lc.removeAttribute("disabled");
+                dg.removeAttribute("disabled");
+                ans.removeAttribute("check-answers");
+                lc.value = "";
+                dg.value = "";
+            }
+            lc.addEventListener("keypress", ev => {
+                if (ev.key == "Enter") {
+                    dg.focus({focusVisible: true});
+                }
+            })
+            dg.addEventListener("keypress", ev => {
+                if (ev.key == "Enter") {
+                    ca.focus({focusVisible: true});
+                }
+            })
+            ca.addEventListener("keypress", ev => {
+                if (ev.key == "Enter") {
+                    nq.focus({focusVisible: true});
+                }
+            })
+            ca.addEventListener("click", checkAnswer);
+            nq.addEventListener("click", generate);
             generate();
+
         }
     </script>
     <body>
@@ -114,12 +212,21 @@
         <br />
         <br />
         <div class="answers">
-            <label for="leading-coeff">What is the leading coefficient of this polynomial? </label>
-            <input type="number" name="leading-coeff">
+            <div class="answer">
+                <label for="leading-coeff">What is the leading coefficient of this polynomial? </label>
+                <input type="number" name="leading-coeff">
+                <p id="status-lc"></p>
+            </div>
+            <div class="answer">
+                <label for="degree">What is the degree of this polynomial? </label>
+                <input type="number" name="degree" checked="0">
+                <p id="status-deg"></p>
+            </div>
             <br />
-            <br />
-            <label for="degree">What is the degree of this polynomial? </label>
-            <input type="number" name="degree">
+            <div class="statsbar">
+                <button id="ca">Check Answer</button>
+                <button id="nq">New Question</button>
+            </div>
         </div>
     </body>
 </html>
