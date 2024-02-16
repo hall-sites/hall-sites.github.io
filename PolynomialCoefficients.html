@@ -118,9 +118,31 @@
         .answer {
             margin-bottom: 20px;
         }
+        .nav-button {
+            margin-bottom: 20px;
+        }
+        .answers[check-answers] #ca {
+            display: none;
+        }
+        footer{
+            text-align: center;
+        }
+        #correct {
+            display: inline;
+            color: #0f0;
+        }
+        #incorrect {
+            display: inline;
+            color: #f00;
+        }
+        #total {
+            display: inline;
+        }
     </style>
     <script>
         onload = () => {
+            let correct = 0;
+            let incorrect = 0;
             let state = 0;
             const question = document.querySelector(".question");
             const ca = document.querySelector("#ca");
@@ -130,6 +152,9 @@
             const slc = document.querySelector("#status-lc");
             const sdg = document.querySelector("#status-deg");
             const ans = document.querySelector(".answers");
+            const corr = document.querySelector("#correct");
+            const incorr = document.querySelector("#incorrect");
+            const tot = document.querySelector("#total");
             let answer = null;
             function generate() {
                 clear();
@@ -173,17 +198,27 @@
                 if (coeff_guess == answer.leadingCoeff) {
                     slc.textContent = "✅";
                     lc.classList.add("correct");
+                    correct++;
                 } else {
                     slc.textContent = `❌ ${answer.leadingCoeff}`;
                     lc.classList.add("incorrect");
+                    incorrect++;
                 }
                 if (deg_guess == answer.degree) {
                     sdg.textContent = "✅";
                     dg.classList.add("correct");
+                    correct++;
                 } else {
                     sdg.textContent = `❌ ${answer.degree}`;
                     dg.classList.add("incorrect");
+                    incorrect++;
                 }
+                tally();
+            }
+            function tally() {
+                incorr.textContent = incorrect;
+                corr.textContent = correct;
+                tot.textContent = incorrect + correct;
             }
             function clear() {
                 lc.removeAttribute("disabled");
@@ -212,6 +247,7 @@
             ca.addEventListener("click", checkAnswer);
             nq.addEventListener("click", generate);
             generate();
+            tally();
 
         }
     </script>
@@ -240,9 +276,16 @@
             </div>
             <br />
             <div class="statsbar">
-                <button id="ca">Check Answer</button>
-                <button id="nq">New Question</button>
+                <button class="nav-button" id="ca">Check Answer</button>
+                <button class="nav-button" id="nq">New Question</button>
+                <br />
+                <p id="correct"></p>
+                <p id="incorrect"></p>
+                <p id="total"></p>
             </div>
         </div>
+        <footer>
+            <p>Made by Jonathan Dixon</p>
+        </footer>
     </body>
 </html>
