@@ -162,10 +162,11 @@
                 const coeffs = [];
                 let qhtml = "";
                 for (let x = degree; x >= 0; x--) {
-                    const coeff = Math.floor(Math.random()*19 - 9);
+                    let coeff = Math.floor(Math.random()*19 - 9);
                     coeffs.push(coeff);
                     if (x == degree && !coeffs[0]) {
                         coeffs[0] = 10;
+                        coeff = 10;
                     }
                     if (coeff) {
                         if (coeff > -1) {
