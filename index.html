@@ -1,122 +1,141 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <title>Hall Websites</title>
-        <link href="https://fonts.googleapis.com/css?family=EB+Garamond&display=swap" rel="stylesheet">
-        <style>
-            body, html {
-                margin: 0;
-                height: 100%;
-                font-family: 'EB Garamond', serif;
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hall Sites</title>
+    <link href="./tailwind-compiled.css" rel="stylesheet">
+    <style>
+        /* Custom animation for the dropdown */
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
             }
 
-            #gray-top {
-                z-index: -1;
-                width: 100%;
-                height: 50%;
-                position: fixed;
-                top: 0;
-                left: 0;
-                background-color: rgb(214, 214, 214);
+            to {
+                opacity: 1;
+                transform: translateY(0);
             }
+        }
+    </style>
+</head>
 
-            #hall-sites {
-                width: 100%;
-                font-size: 2.5rem;
-                text-align: center;
-                position: fixed;
-                top: 0;
-            }
-
-            .app {
-                width: 800px;
-                min-width: 50%;
-                max-width: 95%;
-                background-color: white;
-                margin: 2% auto;
-                padding: 2.5% 1%;
-                box-shadow:rgb(204, 204, 204) 0 0 10px 10px;
-                font-size: 1.3rem;
-            }
-
-            #spacer {
-                height: 7%;
-            }
-
-            #hire {
-                margin: 1%;
-                position: fixed;
-                bottom: 0;
-                left: 0;
-                padding: 2%;
-                background-color: green;
-                font-size: 1.3rem;
-                border-radius: 6px;
-            }
-
-            #last-app {
-                margin-bottom: 6%;
-            }
-
-            h3 {
-                margin: 1%;
-            }
-
-            h4 {
-                margin: 0.7%;
-            }
-        </style>
-    </head>
-    <body>
-        <div id="gray-top"></div>
-        <div id="hall-sites">Hall Websites</div>
-        <div id="spacer"></div>
-        <a href="https://docs.google.com/forms/d/e/1FAIpQLSeZayPyrDRWjMtOSqo6OCHAreEzp6L3LlDliGGwVvwvr2KOzw/viewform" style="color:white;"><div id="hire">
-            Request Website
-        </div></a>
-        <div class="app">
-            <h3>Hello!</h3>
-            <br>
-            You can request a website <a href="https://docs.google.com/forms/d/e/1FAIpQLSeZayPyrDRWjMtOSqo6OCHAreEzp6L3LlDliGGwVvwvr2KOzw/viewform">here</a>! If
-            you have any questions, please email me at <a href="mailto:2024jonathany533@student.whps.org">2024JonathanY533@student.whps.org</a>.
-            Below are the websites that have been already created!
+<body>
+    <div style="width: 800px; max-width: 95%; margin: 0 auto;">
+        <div class="min-w-full my-10">
+            <h1 class="text-3xl font-bold text-gray-800">Welcome to Hall sites 🤠👋</h1>
+            <p class="text-gray-600">Contribute to the <a href="https://github.com/hall-sites/hall-sites.github.io" class="text-blue-600 hover:text-blue-800">hall-sites/hall-sites.github.io repo</a>. Create a PR or ask Jon York or Jeff Billing for the login to the hall-sites github account.</p>
         </div>
-        <div class="app">
-            <h4>Mrs. Brand's Restaurant</h4>
-            An online restaurant which enables teachers to easily order food. 
-            <br>
-            <a href="https://restaurant.jonyork.net">Restaurant</a>
-        </div>
-        <div class="app">
-            <h4>WordleOff!!</h4>
-            Created for the Hall Boy's Track team in order to facilitate a Wordle competition!
-            <br>
-            <a href="https://wordle.jonyork.net">WordleOff</a>
-        </div>
-        <div class="app">
-            <h4>Factoring Flashcards</h4>
-            Used by Mr. Billing to aid in teaching factoring to his students.
-            <br>
-            <a href="factoring.html">Flashcards</a>
-        </div>
-        <div class="app">
-            <h4>Quad Form Flashcards</h4>
-            Used by Mrs. Gangi to help teach the quadradic formula to her students!
-            <br>
-            <a href="quadform.html">Flashcards</a>
-        </div>
-        <div class="app">
-            <h4>Sentence Analyzer</h4>
-            Made for Mrs. Blejwas in order to help visualize aspects of writing such as sentence length.
-            <br>
-            <a href="analyzer.html">Analyzer</a> 
-        </div>
-        <div class="app" id="last-app">
-            <h4>Guess the coefficient!</h4>
-            Made for Mrs. Hudson to help with teaching polynomials.
-            <br>
-            <a href="PolynomialCoefficients.html">Guess the coefficient!</a> 
-        </div>
-        <br>
-    </body>
+        <table class="min-w-full divide-y divide-gray-200">
+            <thead class="bg-gray-50">
+                <tr>
+                    <th scope="col"
+                        class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                        Websites
+                    </th>
+                </tr>
+            </thead>
+            <tbody class="bg-white divide-y divide-gray-200">
+                <!-- Main Row -->
+                <tr class="cursor-pointer hover:bg-gray-100" onclick="toggleDropdown('math-section')">
+                    <td class="px-6 py-4 whitespace-nowrap">
+                        Math 📐
+                    </td>
+                </tr>
+                <!-- Dropdown Content (Initially hidden) -->
+                <tr id="math-section">
+                    <td class="px-6 py-4 whitespace-nowrap">
+                        <div class="flex flex-col">
+                            <a href="/DistExpressions.html" class="text-blue-600 hover:text-blue-800">Distribution Practice</a>
+                            <a href="/factoring.html" class="text-blue-600 hover:text-blue-800">Factoring Practice with a = 1</a>
+                            <a href="/factoring2.html" class="text-blue-600 hover:text-blue-800">Factoring Practice with a ≠ 1</a>
+                            <a href="/SolveLinWithDistFlashCards.html" class="text-blue-600 hover:text-blue-800">Solving 2-Step Linear Equations Practice with Distribution</a>
+                            <a href="/LinearFlashCards.html" class="text-blue-600 hover:text-blue-800">Solving 2-Step Linear Equations Practice</a>
+                            <a href="/SolveSystElimFlash.html" class="text-blue-600 hover:text-blue-800">Solving Systems With Elimination Practice</a>
+                            <a href="/exponents.html" class="text-blue-600 hover:text-blue-800">Exponent Rules Practice</a>
+                            <a href="/quadform.html" class="text-blue-600 hover:text-blue-800">Quadratic Formula Practice</a>
+                            <a href="/SolveLinEqDist.html" class="text-blue-600 hover:text-blue-800">Solving Linear Equations With Distribution</a>
+                            <a href="/ThreeStepLinearEquationFlashCards.html" class="text-blue-600 hover:text-blue-800">Solving 3-Step Linear Equations Practice</a>
+                            <a href="/SolveSystSubFlash.html" class="text-blue-600 hover:text-blue-800">Solving Systems With Substitution Practice</a>
+                            <a href="/SolveLinEqCLT.html" class="text-blue-600 hover:text-blue-800">Solving Linear Equations With Combining Like Terms Practice</a>
+                            <a href="/PolynomialCoefficients.html" class="text-blue-600 hover:text-blue-800">Polynomial Coefficients Practice</a>
+                        </div>
+                    </td>
+                </tr>
+                <!-- Main Row -->
+                <tr class="cursor-pointer hover:bg-gray-100" onclick="toggleDropdown('cs-section')">
+                    <td class="px-6 py-4 whitespace-nowrap">
+                        Computer Science 💻
+                    </td>
+                </tr>
+                <!-- Dropdown Content (Initially hidden) -->
+                <tr id="cs-section">
+                    <td class="px-6 py-4 whitespace-nowrap">
+                        <div class="flex flex-col">
+                            <a href="/2d-arrays.html" class="text-blue-600 hover:text-blue-800">2D Array Demo</a>
+                        </div>
+                    </td>
+                </tr>
+                <!-- Main Row -->
+                <tr class="cursor-pointer hover:bg-gray-100" onclick="toggleDropdown('physics-section')">
+                    <td class="px-6 py-4 whitespace-nowrap">
+                        Physics ⚛️
+                    </td>
+                </tr>
+                <!-- Dropdown Content (Initially hidden) -->
+                <tr id="physics-section">
+                    <td class="px-6 py-4 whitespace-nowrap">
+                        <div class="flex flex-col">
+                            <a href="/p5/index.html" class="text-blue-600 hover:text-blue-800">Flux Calculator</a>
+                        </div>
+                    </td>
+                </tr>
+                <!-- Main Row -->
+                <tr class="cursor-pointer hover:bg-gray-100" onclick="toggleDropdown('games-section')">
+                    <td class="px-6 py-4 whitespace-nowrap">
+                        Games 🎮
+                    </td>
+                </tr>
+                <!-- Dropdown Content (Initially hidden) -->
+                <tr id="games-section">
+                    <td class="px-6 py-4 whitespace-nowrap">
+                        <div class="flex flex-col">
+                            <a href="https://wordleoff.net" class="text-blue-600 hover:text-blue-800">Wordle Off!!</a>
+                            <a href="https://minesweeper.jonyork.net" class="text-blue-600 hover:text-blue-800">minesweeperVS</a>
+                        </div>
+                    </td>
+                </tr>
+                <!-- Main Row -->
+                <tr class="cursor-pointer hover:bg-gray-100" onclick="toggleDropdown('misc-section')">
+                    <td class="px-6 py-4 whitespace-nowrap">
+                        Misc 🎱
+                    </td>
+                </tr>
+                <!-- Dropdown Content (Initially hidden) -->
+                <tr id="misc-section">
+                    <td class="px-6 py-4 whitespace-nowrap">
+                        <div class="flex flex-col">
+                            <a href="/analyzer.html" class="text-blue-600 hover:text-blue-800">Sentence Analyzer</a>
+                            <a href="/track/ct-dist-fest.html" class="text-blue-600 hover:text-blue-800">CT Distance Fest Seed Calculator</a>
+                            <a href="https://zyfo.live" class="text-blue-600 hover:text-blue-800">Zyfo.ai - AI Website Generator</a>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <br><br>
+    </div>
+    <script>
+        function toggleDropdown(id) {
+            const element = document.getElementById(id);
+            const isHidden = element.classList.contains('hidden');
+            element.style.animation = isHidden ? 'slideDown 0.3s ease-in-out' : '';
+            element.classList.toggle('hidden');
+        }
+    </script>
+
+</body>
+
 </html>
