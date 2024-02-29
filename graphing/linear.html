@@ -112,6 +112,10 @@
 
 <body>
     <h1>Online Linear Graphing Practice</h1>
+    <p style="text-align: center; width: 40%; margin: 0 auto; font-size: 1.2rem;">
+        Move the m and b sliders until the <span style="color: rgb(207, 2, 2);">red line</span> is matched up with the
+        <span style="color: rgb(53, 100, 255);">blue line</span>. Notice how the m and b values affect the graph!
+    </p>
     <h2>Score: <span id="points">0</span> &sdot; Time: <span id="time">0</span> <span id="streak" hidden>&sdot;
             🔥<span id="streakNum"></span></span> </h2>
 
@@ -135,8 +139,9 @@
         }
 
         function randomize() {
-            rand1 = Math.floor(Math.random() * 10) - 5;
-            rand2 = Math.floor(Math.random() * 10) - 5;
+            rand1 = Math.floor(Math.random() * 14) - 6;
+            rand2 = Math.floor(Math.random() * 14) - 6;
+
             calculator.setState({
                 "version": 10,
                 "randomSeed": "a4899b3d96057cff88478badc94ca53e",
@@ -154,30 +159,18 @@
                             "type": "expression",
                             "id": "dashedLine",
                             "latex": `y=m*x+b`,
-                            "sliderBounds": {
-                                "m": "m",
-                                "b": "b"
-                            }
                         },
                         {
                             "type": "expression",
                             "id": "m",
                             "latex": "m=1",
-                            "sliderBounds": {
-                                "min": -5,
-                                "max": 5,
-                                "step": 0.1
-                            }
+                            "slider":{"hardMin":true,"hardMax":true,"min":"-8","max":"8","step":"0.5"}
                         },
                         {
                             "type": "expression",
                             "id": "b",
                             "latex": "b=0",
-                            "sliderBounds": {
-                                "min": -5,
-                                "max": 5,
-                                "step": 0.1
-                            }
+                            "slider":{"hardMin":true,"hardMax":true,"min":"-8","max":"8","step":"0.5"}
                         },
                         { "type": "expression" },
                         { "type": "expression" },
@@ -217,10 +210,24 @@
             points.innerHTML = score;
         }
 
+        function formatEq(m, b) {
+            if (m == 1) {
+                m = "";
+            } else if (m == -1) {
+                m = "-";
+            }
+            if (b < 0) {
+                return "y=" + m + "x" + b;
+            } else {
+                return "y=" + m + "x+" + b;
+            }
+        }
+
         function check() {
             let m = getM();
             let b = getB();
             if (b == rand2 && m == rand1) {
+                Swal.fire("Correct!! The equation was " + formatEq(rand1, rand2) + "!");
                 incScore();
                 randomize();
             } else {
