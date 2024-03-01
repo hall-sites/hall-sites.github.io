@@ -83,7 +83,7 @@
         const mileSeed = totalTimeInSeconds * conversionFactors[distanceSelect];
         
         let mins = Math.floor(mileSeed / 60);
-        let secs = (mileSeed % 60).toFixed(2);
+        let secs = Math.floor((mileSeed % 60)*100)/100.toFixed(2);
         if (secs < 10) {
         	secs = '0' + secs;
         }
